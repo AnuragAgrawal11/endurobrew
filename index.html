@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnduroBrew — Project Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121F; --ink2:#232039; --line:#3A3656; --soft:#F6F5FB; --muted:#5E5B70; --white:#FFFFFF;
+  --lime:#C8F169; --coral:#FF6B4A; --yuzu:#FFD447; --mint:#5EE6C0; --cobalt:#3D5AFE; --violet:#6A3DE8; --espresso:#3B2418; --pink:#F7B2C4;
+  --display:'Space Grotesk', Inter, system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--white);line-height:1.5}
+a{color:var(--cobalt)}
+h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.02em}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:72px 0}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px}
+.sec-head h2{font-size:clamp(32px,4.4vw,52px);line-height:1.05}
+.sec-head p{max-width:460px;margin:0;color:var(--muted);font-size:16px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g5{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.card{border-radius:24px;padding:24px}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+.idea{background:#EEE9FF;color:#4B2FC0}
+.plan{background:#E6F7C2;color:#2F5A06}
+.stat{font-family:var(--display);font-weight:700;font-size:clamp(30px,3.4vw,42px);line-height:1.05}
+.src{font-size:12px;color:#6B6880;margin-top:16px}
+table{border-collapse:collapse;width:100%}
+.tbl-box{overflow-x:auto}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink)}
+td{padding:12px;border-bottom:1px solid #DCDAE6;font-size:15px;vertical-align:top}
+.dark{background:var(--ink);color:var(--white)}
+.dark .sec-head p{color:#CFCDE0}
+.soft{background:var(--soft)}
+svg text{font-family:Inter,sans-serif}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:10;background:rgba(20,18,31,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:20px;height:60px;overflow-x:auto;white-space:nowrap}
+nav.top .logo{font-family:var(--display);font-weight:700;color:#fff;font-size:20px;text-decoration:none;margin-right:8px}
+nav.top .logo span{color:var(--lime)}
+nav.top a.l{color:#CFCDE0;text-decoration:none;font-size:14px;font-weight:600;padding:8px 2px}
+nav.top a.l:hover{color:var(--lime)}
+
+/* hero */
+.hero{background:var(--ink);color:#fff;padding:72px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;align-items:center}
+.hero h1{font-size:clamp(64px,9vw,112px);line-height:.95;letter-spacing:-.04em}
+.hero h1 span{color:var(--lime)}
+.hero .tag{font-family:var(--display);font-size:clamp(26px,3vw,38px);font-weight:500;margin:18px 0}
+.hero p.lead{color:#CFCDE0;font-size:19px;max-width:600px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:28px}
+.kpis div{border-radius:18px;padding:16px;color:var(--ink)}
+.kpis b{display:block;font-family:var(--display);font-size:36px;line-height:1}
+.kpis span{font-size:13px;font-weight:600}
+
+/* idea map */
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.map .core{grid-column:2;grid-row:2;background:var(--ink);color:#fff;border-radius:999px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;min-height:160px}
+.map .core b{font-family:var(--display);font-size:40px;line-height:1}
+.map .core b span{color:var(--lime)}
+.pillar{border-radius:22px;padding:22px;font-size:15px}
+.pillar .n{font-size:12px;font-weight:700;letter-spacing:.12em}
+.pillar h3{font-size:21px;margin:4px 0 8px}
+@media (max-width:820px){.map{grid-template-columns:1fr}.map .core{grid-column:auto;grid-row:auto}}
+.journey{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:24px;font-weight:600}
+.journey span.s{background:#fff;border:2px solid var(--ink);border-radius:999px;padding:10px 18px}
+
+/* menu */
+.drink{background:#fff;color:var(--ink);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.drink .pic{height:150px;display:flex;align-items:center;justify-content:center}
+.drink .body{padding:16px;display:flex;flex-direction:column;gap:6px}
+.drink h3{font-size:18px;line-height:1.2}
+.drink p{margin:0;font-size:14px;color:#4A475E}
+
+/* ages */
+.age{border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.age h3{font-size:24px}
+.age ul{margin:0;padding-left:18px;font-size:15px}
+.age li{margin:4px 0}
+
+/* gantt */
+.gantt{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:6px;min-width:760px}
+.gantt .d{font-size:12px;color:var(--muted);font-weight:600;text-align:center}
+.gantt .bar{border-radius:12px;padding:12px;font-size:14px;line-height:1.4}
+
+/* tabs for scenarios */
+.seg{display:inline-flex;background:#ECEAF4;border-radius:999px;padding:4px;gap:4px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;font:600 14px Inter,sans-serif;padding:10px 16px;border-radius:999px;cursor:pointer;color:var(--ink);min-height:44px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--lime)}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;align-items:center}
+.calc label{font-weight:600;font-size:14px;display:block;margin-bottom:6px}
+.calc input[type=range]{width:100%;accent-color:var(--violet);min-height:32px}
+.out{border-radius:18px;padding:18px;background:#fff}
+.out b{display:block;font-family:var(--display);font-size:32px;line-height:1.1}
+
+footer{background:var(--ink);color:#CFCDE0;padding:48px 0;font-size:13px}
+footer a{color:var(--lime)}
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Sections">
+  <div class="wrap">
+    <a class="logo" href="#top">Enduro<span>Brew</span></a>
+    <a class="l" href="#map">Idea map</a>
+    <a class="l" href="#market">Market</a>
+    <a class="l" href="#froyo-benchmark">Dubai &amp; UK froyo</a>
+    <a class="l" href="#menu">Menu</a>
+    <a class="l" href="#ages">All ages</a>
+    <a class="l" href="#personal">Personalised</a>
+    <a class="l" href="#economics">Economics</a>
+    <a class="l" href="#roadmap">Roadmap</a>
+    <a class="l" href="#tech">Tech</a>
+    <a class="l" href="#risks">Risks</a>
+    <a class="l" href="#brand">Brand</a>
+    <a class="l" href="#sources">Sources</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="chip" style="background:var(--lime);color:var(--ink)">PROJECT TACTICAL BLUEPRINT · NOV 2026</span>
+      <h1 style="margin-top:20px">Enduro<span>Brew</span></h1>
+      <div class="tag">Tap protein. Skip the queue.</div>
+      <p class="lead">A Yogurtland-style, 100% autonomous, app-free smart <b style="color:#fff">Tap Wall</b> and <b style="color:#fff">Smart Vending Unit</b> — coffee infusions, functional drinks, protein froyo and smoothies — for padel &amp; pickleball clubs, premium gyms, tech parks and co-working hubs across urban India.</p>
+      <a href="#personal" style="display:inline-flex;gap:10px;align-items:center;background:var(--mint);color:var(--ink);font-weight:700;text-decoration:none;border-radius:999px;padding:10px 18px;margin-top:4px;min-height:44px">New · Personalised fuel from your watch, like LINC → see how it works</a>
+      <div class="kpis">
+        <div style="background:var(--lime)"><b>&lt;45s</b><span>scan to sip</span></div>
+        <div style="background:var(--coral)"><b>0</b><span>apps to download</span></div>
+        <div style="background:var(--yuzu)"><b>5</b><span>taps per wall</span></div>
+        <div style="background:var(--mint)"><b>15%</b><span>revenue to venue</span></div>
+      </div>
+    </div>
+    <div>
+      <svg role="img" aria-label="Illustration of the EnduroBrew tap wall with five coloured taps and a QR code, beside a blue glass-door vending unit holding froyo cups and smoothies" viewBox="0 0 560 640" width="100%" style="max-width:560px;display:block;margin:auto">
+        <ellipse cx="290" cy="604" rx="260" ry="18" fill="#000" opacity=".35"/>
+        <rect x="40" y="40" width="300" height="556" rx="28" fill="#232039" stroke="#3A3656" stroke-width="2"/>
+        <rect x="64" y="64" width="252" height="92" rx="16" fill="#14121F"/>
+        <text x="84" y="104" font-family="Space Grotesk" font-size="28" font-weight="700" fill="#C8F169">ENDUROBREW</text>
+        <text x="84" y="134" font-size="14" font-weight="600" fill="#B9B6CC" letter-spacing="3">TAP · PAY · POUR</text>
+        <rect x="80" y="192" width="22" height="72" rx="11" fill="#C8F169"/><rect x="126" y="192" width="22" height="72" rx="11" fill="#FF6B4A"/><rect x="172" y="192" width="22" height="72" rx="11" fill="#FFD447"/><rect x="218" y="192" width="22" height="72" rx="11" fill="#5EE6C0"/><rect x="264" y="192" width="22" height="72" rx="11" fill="#A98BFF"/>
+        <g fill="#C9CBD6"><rect x="84" y="266" width="14" height="30" rx="4"/><rect x="130" y="266" width="14" height="30" rx="4"/><rect x="176" y="266" width="14" height="30" rx="4"/><rect x="222" y="266" width="14" height="30" rx="4"/><rect x="268" y="266" width="14" height="30" rx="4"/></g>
+        <rect x="135" y="298" width="4" height="22" rx="2" fill="#3B2418"/>
+        <path d="M115 336 L159 336 L156 392 L118 392 Z" fill="#3B2418"/><path d="M114 324 L160 324 L159 338 L115 338 Z" fill="#F3E3C8"/>
+        <rect x="64" y="392" width="252" height="20" rx="6" fill="#3A3656"/>
+        <rect x="108" y="440" width="164" height="128" rx="14" fill="#fff"/>
+        <g fill="#14121F"><rect x="124" y="456" width="30" height="30"/><rect x="226" y="456" width="30" height="30"/><rect x="124" y="522" width="30" height="30"/><rect x="170" y="470" width="12" height="12"/><rect x="194" y="458" width="10" height="16"/><rect x="186" y="496" width="22" height="10"/><rect x="214" y="510" width="12" height="12"/><rect x="170" y="530" width="12" height="16"/><rect x="236" y="530" width="20" height="12"/><rect x="200" y="534" width="10" height="10"/></g>
+        <g fill="#fff"><rect x="131" y="463" width="16" height="16"/><rect x="233" y="463" width="16" height="16"/><rect x="131" y="529" width="16" height="16"/></g>
+        <rect x="370" y="120" width="170" height="476" rx="24" fill="#3D5AFE"/>
+        <rect x="388" y="148" width="134" height="340" rx="14" fill="#DDE3FF"/>
+        <g fill="#9AA8FF"><rect x="388" y="232" width="134" height="4"/><rect x="388" y="318" width="134" height="4"/><rect x="388" y="404" width="134" height="4"/></g>
+        <path d="M404 200 L438 200 L434 232 L408 232 Z" fill="#fff"/><path d="M404 200 C410 184 432 184 438 200 Z" fill="#F7B2C4"/>
+        <path d="M448 200 L482 200 L478 232 L452 232 Z" fill="#fff"/><path d="M448 200 C454 184 476 184 482 200 Z" fill="#C8F169"/>
+        <rect x="490" y="196" width="24" height="36" rx="5" fill="#FFD447"/>
+        <rect x="402" y="270" width="24" height="48" rx="6" fill="#FF6B4A"/><rect x="434" y="278" width="24" height="40" rx="6" fill="#5EE6C0"/><rect x="466" y="270" width="24" height="48" rx="6" fill="#A98BFF"/>
+        <rect x="402" y="360" width="34" height="44" rx="6" fill="#FF6B4A"/><rect x="444" y="368" width="34" height="36" rx="6" fill="#FFD447"/><rect x="486" y="360" width="26" height="44" rx="6" fill="#C8F169"/>
+        <rect x="396" y="510" width="118" height="56" rx="10" fill="#14121F"/>
+        <text x="410" y="536" font-size="12" font-weight="700" fill="#5EE6C0">UNLOCKED</text>
+        <text x="410" y="554" font-size="11" fill="#B9B6CC">Door 2 · froyo</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- PROBLEM / SOLUTION -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#D2401F">01 · The problem</div><h2>Three gaps in urban India</h2></div><p>Professionals and players want fast, clean, high-protein fuel. Today they get queues, sugary sodas or broken machines.</p></div>
+    <div class="grid g4">
+      <div class="card soft"><div class="eyebrow" style="color:#D2401F">Cafe bottleneck</div><p style="font-size:17px;margin:8px 0 0">Queueing, ordering and waiting takes <b>15–20 minutes</b> for a basic coffee or post-workout drink.</p></div>
+      <div class="card soft"><div class="eyebrow" style="color:#D2401F">Gym / turf void</div><p style="font-size:17px;margin:8px 0 0">After pickleball, padel or turf cricket it's warm sugary soft drinks or a messy protein shaker.</p></div>
+      <div class="card soft"><div class="eyebrow" style="color:#D2401F">Vending failure</div><p style="font-size:17px;margin:8px 0 0">Old machines are clunky, eat money, jam and need cash or tokens.</p></div>
+      <div class="card" style="background:var(--lime)"><div class="eyebrow">The 1-click fix</div><p style="font-size:17px;margin:8px 0 0;font-weight:600">Scan QR → pick on a web page → 1-tap UPI → the tap pours or the glass door unlocks. Zero staff on site.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- IDEA MAP -->
+<section class="soft" id="map">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#4B2FC0">02 · Idea map</div><h2>Six pillars, one machine</h2></div><p>How the founder trifecta, the menu, the venues and the money fit together.</p></div>
+    <div class="map">
+      <div class="pillar" style="background:var(--lime)"><div class="n">01 · PRODUCT</div><h3>5 taps + smart fridge</h3>Coffee infusions &amp; electrolytes on tap. Protein froyo, smoothies, smoothie bowls and RTD shakes behind IoT glass doors.</div>
+      <div class="pillar" style="background:var(--coral)"><div class="n">02 · LOCATIONS</div><h3>Where thirst is high</h3>Pickleball &amp; padel clubs · boutique gyms &amp; CrossFit boxes · tech-park &amp; co-working lobbies · premium residential clubhouses (24/7).</div>
+      <div class="pillar" style="background:var(--cobalt);color:#fff"><div class="n">03 · TECH</div><h3>Built in-house by IT</h3>QR → PWA → Razorpay / Cashfree UPI → AWS / Node.js backend → ESP32 / Raspberry Pi → flow meters, door locks, weight scales, sensors.</div>
+      <div class="pillar" style="background:var(--yuzu)"><div class="n">04 · TEAM</div><h3>Founder trifecta</h3><b>IT:</b> firmware, PWA, UPI, inventory engine. <b>Sales:</b> placement deals with gyms, turfs, RWAs, co-working. <b>Marketing:</b> Reels, run-club collabs, "First Pour Free" QR drops.</div>
+      <div class="core"><b>Enduro<span>Brew</span></b><span style="margin-top:6px">1-click self-serve fuel</span></div>
+      <div class="pillar" style="background:var(--mint)"><div class="n">05 · MONEY</div><h3>Zero-capex for venues</h3>Venue gives 6 sq ft + power, keeps 15% of revenue. CapEx ₹1.2 L per tap wall, ₹95 K per vending unit. Ticket ₹150–160.</div>
+      <div class="pillar" style="background:var(--violet);color:#fff;grid-column:1 / -1"><div class="n">06 · GO-TO-MARKET</div><h3>Pilot in 14 days</h3>Pitch 10 local pickleball clubs and boutique gyms → install the first prototype at a sports venue → QR wraps ("Post-Match Cold Brew in 10 Seconds") → WhatsApp / Instagram QR drop for club members.</div>
+    </div>
+    <div class="journey"><span class="eyebrow" style="color:var(--muted)">Customer journey &lt; 45s</span><span class="s">1 · Scan QR</span><span aria-hidden="true">→</span><span class="s">2 · Pick on web page</span><span aria-hidden="true">→</span><span class="s">3 · UPI in 5 s</span><span aria-hidden="true">→</span><span class="s" style="background:var(--ink);color:var(--lime)">4 · Pours / unlocks</span></div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#4B2FC0">03 · Market research</div><h2>The tailwinds are real</h2></div><p>Coffee, protein, racquet sports, gyms and UPI are all growing at once — EnduroBrew sits in the overlap.</p></div>
+    <div class="grid g4">
+      <div class="card" style="background:var(--espresso);color:#fff"><div class="eyebrow" style="color:#F3E3C8">India cold brew</div><div class="stat">$67M → $332M</div><div style="color:#F3E3C8">2025 → 2034 · ~18.9% a year</div></div>
+      <div class="card" style="background:var(--cobalt);color:#fff"><div class="eyebrow" style="color:#DDE3FF">UPI payments</div><div class="stat">20.7 B</div><div style="color:#DDE3FF">transactions in Oct 2025, a record month</div></div>
+      <div class="card" style="background:var(--lime)"><div class="eyebrow">Pickleball courts</div><div class="stat">200 → 1,200+</div><div>early 2024 → mid 2025</div></div>
+      <div class="card" style="background:var(--coral)"><div class="eyebrow">Fitness facilities</div><div class="stat">46.5K → 65.5K</div><div>commercial gyms &amp; studios, 2024 → 2030</div></div>
+    </div>
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card soft">
+        <h3 style="font-size:22px">Racquet-sport courts in India</h3>
+        <svg role="img" aria-label="Bar chart: pickleball courts about 200 in early 2024 and over 1,200 by mid 2025; padel courts about 70 in 2023 and over 300 in early 2026" viewBox="0 0 580 300" width="100%">
+          <line x1="40" y1="250" x2="560" y2="250" stroke="#14121F" stroke-width="2"/>
+          <line x1="40" y1="140" x2="560" y2="140" stroke="#DCDAE6" stroke-dasharray="4 4"/><line x1="40" y1="30" x2="560" y2="30" stroke="#DCDAE6" stroke-dasharray="4 4"/>
+          <text x="34" y="254" font-size="12" fill="#5E5B70" text-anchor="end">0</text><text x="34" y="144" font-size="12" fill="#5E5B70" text-anchor="end">600</text><text x="34" y="34" font-size="12" fill="#5E5B70" text-anchor="end">1,200</text>
+          <rect x="80" y="213" width="90" height="37" rx="8" fill="#C8F169" stroke="#14121F" stroke-width="1.5"/><rect x="190" y="30" width="90" height="220" rx="8" fill="#C8F169" stroke="#14121F" stroke-width="1.5"/>
+          <rect x="330" y="237" width="90" height="13" rx="4" fill="#FF6B4A" stroke="#14121F" stroke-width="1.5"/><rect x="440" y="195" width="90" height="55" rx="8" fill="#FF6B4A" stroke="#14121F" stroke-width="1.5"/>
+          <g font-family="Space Grotesk" font-size="18" font-weight="700" text-anchor="middle" fill="#14121F"><text x="125" y="204">~200</text><text x="235" y="22">1,200+</text><text x="375" y="228">~70</text><text x="485" y="186">300+</text></g>
+          <g font-size="12" fill="#5E5B70" text-anchor="middle"><text x="125" y="272">Early 2024</text><text x="235" y="272">Mid 2025</text><text x="375" y="272">2023</text><text x="485" y="272">Early 2026</text></g>
+          <g font-size="14" font-weight="700" text-anchor="middle" fill="#14121F"><text x="180" y="294">PICKLEBALL</text><text x="430" y="294">PADEL</text></g>
+        </svg>
+      </div>
+      <div class="card soft">
+        <h3 style="font-size:22px">Adjacent markets in India (USD M)</h3>
+        <svg role="img" aria-label="Horizontal bar chart: protein supplements 913 million dollars in 2025, vending machines 700 million in 2024, cold brew coffee 67 million in 2025, hot beverage vending 58 million in 2025" viewBox="0 0 580 300" width="100%">
+          <g font-size="14" font-weight="600" fill="#14121F"><text x="0" y="36">Protein supplements</text><text x="0" y="110">Vending machines (2024)</text><text x="0" y="184">Cold brew coffee</text><text x="0" y="258">Hot beverage vending</text></g>
+          <rect x="0" y="46" width="440" height="30" rx="8" fill="#6A3DE8"/><rect x="0" y="120" width="337" height="30" rx="8" fill="#3D5AFE"/><rect x="0" y="194" width="32" height="30" rx="8" fill="#3B2418"/><rect x="0" y="268" width="28" height="30" rx="8" fill="#FF6B4A"/>
+          <g font-family="Space Grotesk" font-size="18" font-weight="700" fill="#14121F"><text x="452" y="68">$913M</text><text x="349" y="142">$700M</text><text x="44" y="216">$67M · ~19%/yr growth</text><text x="40" y="290">$58M</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card" style="border:2px solid var(--ink)"><div class="eyebrow" style="color:#4B2FC0">Biggest competitor</div><h3 style="font-size:24px;margin:6px 0">Daalchini</h3>~5,500 cashless smart vending machines and ₹140 Cr revenue in FY26; profitable since FY25. Snacks &amp; generic drinks, mostly offices.</div>
+      <div class="card" style="border:2px solid var(--ink)"><div class="eyebrow" style="color:#4B2FC0">Other smart vendors</div><h3 style="font-size:24px;margin:6px 0">Wendor · Vendekin · NutriTap</h3>Same IoT + UPI playbook with a generic catalogue. None is built around premium functional drinks at sports venues.</div>
+      <div class="card dark"><div class="eyebrow" style="color:var(--lime)">The white space</div><h3 style="font-size:24px;margin:6px 0">Premium fuel × sports venues</h3><span style="color:#CFCDE0">Nitro, protein coffee, electrolytes and protein froyo where players finish matches — cafe quality at vending speed.</span></div>
+    </div>
+    <div class="src">Sources: IMARC (cold brew, protein supplements, vending) · NPCI via Business Today (UPI) · CapTable via IBEF (pickleball) · PadelPark India via Free Press Journal (padel) · Deloitte–HFA India Fitness Report 2025 · MarkNtel (hot beverage vending) · Inc42 (Daalchini).</div>
+  </div>
+</section>
+
+<!-- FROYO BENCHMARK -->
+<section class="dark" id="froyo-benchmark">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:var(--yuzu)">04 · Global benchmark</div><h2>What Yogurtland Dubai &amp; UK froyo sell</h2></div><p>Self-serve, pay-by-weight froyo is booming in both markets. Here's what they offer and what EnduroBrew can borrow.</p></div>
+    <div class="grid g2">
+      <div class="card" style="background:#2A2440">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 style="font-size:28px">Yogurtland · Dubai</h3><span class="chip" style="background:var(--yuzu);color:var(--ink)">UAE · since 2014</span></div>
+        <ul style="padding-left:18px;color:#E4E2F0;font-size:15px;line-height:1.7">
+          <li>Opened at <b>The Dubai Mall</b> in Jan 2014; also Springs Souk and BoxPark, plus Sharjah.</li>
+          <li><b>Flavours seen:</b> mango, pistachio, macadamia, white chocolate, blue raspberry; vegan chocolate and sorbets (often sold out).</li>
+          <li><b>Toppings:</b> fresh fruit, tapioca pearls, crushed biscuits; sauces added at the till.</li>
+          <li><b>Model:</b> fully self-serve, cup weighed at the counter. From <b>AED 2.99 per ounce</b>; ~AED 32.50 for a medium cup with three toppings.</li>
+          <li><b>Brand-wide:</b> up to 16 rotating flavours, ~30 toppings, non-fat, low-fat, non-dairy and no-sugar-added options; oat-milk flavours; açaí &amp; fruit bowls; a pineapple + spinach + kale "greens" smoothie bowl.</li>
+        </ul>
+      </div>
+      <div class="card" style="background:#2A2440">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h3 style="font-size:28px">UK froyo scene</h3><span class="chip" style="background:var(--coral);color:var(--ink)">London · 2026 boom</span></div>
+        <p style="color:#CFCDE0;font-size:14px;margin:6px 0 10px">Yogurtland doesn't list the UK among its markets, so these are the UK leaders it would compete with.</p>
+        <ul style="padding-left:18px;color:#E4E2F0;font-size:15px;line-height:1.7">
+          <li><b>SNOG:</b> Original (100 kcal/100 g), Mango Passion Fruit (96), Miso Caramel Banana (108), Hazelnut Chocolate Praline (127), vegan Tajin Grilled Pineapple (93). Cups ~£4.80, toppings ~£0.95–1.85.</li>
+          <li><b>Yolé:</b> signature froyo with no added sugar; create-your-own cup ~£6.45.</li>
+          <li><b>Yo-Chi</b> (Australia → Notting Hill Aug 2026, then Clapham): 9–10 flavours incl. vanilla, butterscotch, chocolate, matcha; eight are 98% fat-free; 30+ toppings incl. fresh fruit &amp; mini mochi; pay by weight.</li>
+          <li><b>MYKA:</b> Greek froyo made in-store daily with goat's-milk kefir, two new seasonal flavours a month.</li>
+          <li><b>Go Greek</b> (Mayfair) and <b>Mast</b> (Westfield) round out the wave.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="background:var(--lime);color:var(--ink);margin-top:20px">
+      <h3 style="font-size:24px">What EnduroBrew borrows</h3>
+      <div class="grid g4" style="margin-top:12px;font-size:15px">
+        <div><b>Pay by weight</b><br>Load cell under the cup — your plan's weight scales already do this.</div>
+        <div><b>Calories on the label</b><br>SNOG-style kcal per 100 g shown on the PWA for every flavour.</div>
+        <div><b>A no-added-sugar base</b><br>Like Yolé, always keep one sugar-free option on.</div>
+        <div><b>Monthly rotation</b><br>Like MYKA, two seasonal flavours a month drive repeat visits.</div>
+      </div>
+    </div>
+    <div class="src" style="color:#9A97AE">Sources: The National, Lovin Dubai, Time Out Abu Dhabi, Deliveroo UAE, HappyCow, Wikipedia (Yogurtland) · Deliveroo UK (SNOG, Yolé) · Time Out London, Restaurant Online, The Grocer (Yo-Chi) · RLI (MYKA) · Yogurtland press releases (oat-milk flavours) · LIVEKINDLY.</div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#D2401F">05 · The menu</div><h2>Taps, froyo bar, smoothies</h2></div><p><span class="chip plan">plan</span> = from your blueprint. <span class="chip idea">idea</span> = inspired by Dubai &amp; UK froyo, adapted for India — swap freely.</p></div>
+
+    <h3 style="font-size:26px;margin-bottom:14px">A · The Tap Wall — coffee brews &amp; electrolytes (per ml)</h3>
+    <div class="grid g5" style="background:var(--ink);padding:16px;border-radius:28px">
+      <div class="drink"><div class="pic" style="background:var(--espresso)"><svg aria-hidden="true" width="90" height="120" viewBox="0 0 110 150"><path d="M19 48 L91 48 L85 140 L25 140 Z" fill="#1B0F09"/><path d="M17 22 L93 22 L91 50 L19 50 Z" fill="#F3E3C8"/></svg></div><div class="body"><span class="chip plan" style="align-self:flex-start">plan</span><h3>Chikmagalur Nitro Cold Brew</h3><p>N₂ foam head · 0 sugar · ~5 kcal</p></div></div>
+      <div class="drink"><div class="pic" style="background:var(--yuzu)"><svg aria-hidden="true" width="90" height="120" viewBox="0 0 110 150"><path d="M19 40 L91 40 L85 140 L25 140 Z" fill="#C79A6B"/><path d="M19 40 L91 40 L90 56 L20 56 Z" fill="#EBD3B2"/></svg></div><div class="body"><span class="chip plan" style="align-self:flex-start">plan</span><h3>Vanilla "Proffee"</h3><p>Cold brew + clear whey · 20 g protein</p></div></div>
+      <div class="drink"><div class="pic" style="background:var(--coral)"><svg aria-hidden="true" width="90" height="120" viewBox="0 0 110 150"><path d="M19 44 L91 44 L85 140 L25 140 Z" fill="#E8833A"/><path d="M22 90 L88 90 L85 140 L25 140 Z" fill="#5A2E14"/><circle cx="44" cy="64" r="4" fill="#fff"/><circle cx="66" cy="76" r="3" fill="#fff"/></svg></div><div class="body"><span class="chip plan" style="align-self:flex-start">plan</span><h3>Sparkling Grapefruit Espresso</h3><p>Fizzy citrus-tonic coffee mocktail</p></div></div>
+      <div class="drink"><div class="pic" style="background:var(--violet)"><svg aria-hidden="true" width="90" height="120" viewBox="0 0 110 150"><path d="M19 42 L91 42 L85 140 L25 140 Z" fill="#2A1A10"/><path d="M42 80 C48 70 62 70 66 80 C70 92 52 96 50 88" fill="none" stroke="#C9B8FF" stroke-width="3"/></svg></div><div class="body"><span class="chip plan" style="align-self:flex-start">plan</span><h3>Lion's Mane Focus Brew</h3><p>Nootropic coffee, jitter-free</p></div></div>
+      <div class="drink"><div class="pic" style="background:var(--mint)"><svg aria-hidden="true" width="90" height="120" viewBox="0 0 110 150"><path d="M19 40 L91 40 L85 140 L25 140 Z" fill="#F2F7C4"/><circle cx="74" cy="30" r="16" fill="#FFE066" stroke="#E2B800" stroke-width="2"/></svg></div><div class="body"><span class="chip plan" style="align-self:flex-start">plan</span><h3>Pink Salt &amp; Yuzu Electrolyte</h3><p>Post-workout hydration · caffeine-free</p></div></div>
+    </div>
+    <p style="font-size:15px;color:var(--muted)">Rotating extras <span class="chip idea">idea</span>: Classic Black Cold Brew · Mocha Proffee · Decaf Cold Brew · Masala-Chai Cold Brew (oat milk).</p>
+
+    <h3 style="font-size:26px;margin:36px 0 14px">B · Protein Froyo Bar — Yogurtland-style, self-serve by IoT</h3>
+    <div class="grid g3">
+      <div class="card" style="background:#FFE3DB">
+        <div class="stat" style="color:#D2401F">1</div><h3 style="font-size:21px;margin:4px 0 10px">Pick your base</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:15px">
+          <div><span class="chip plan">plan</span> <b>High-Protein Greek Froyo</b> — classic tart</div>
+          <div><span class="chip idea">idea</span> <b>Alphonso Mango</b> <span style="color:var(--muted)">(Dubai's mango, the Indian way)</span></div>
+          <div><span class="chip idea">idea</span> <b>Pistachio Rose</b> <span style="color:var(--muted)">(Dubai pistachio + gulkand)</span></div>
+          <div><span class="chip idea">idea</span> <b>Jaggery Caramel Banana</b> <span style="color:var(--muted)">(SNOG's miso caramel banana, desi-style)</span></div>
+          <div><span class="chip idea">idea</span> <b>Matcha Greek</b> <span style="color:var(--muted)">(Yo-Chi)</span></div>
+          <div><span class="chip idea">idea</span> <b>Kefir Original</b> <span style="color:var(--muted)">(MYKA-style, extra probiotic)</span></div>
+          <div><span class="chip idea">idea</span> <b>Chilli-Chaat Pineapple Sorbet</b> · vegan <span style="color:var(--muted)">(SNOG's Tajin pineapple)</span></div>
+          <div><span class="chip idea">idea</span> <b>Oat-Milk Cinnamon Cookie</b> · vegan <span style="color:var(--muted)">(Yogurtland oat flavour)</span></div>
+        </div>
+      </div>
+      <div class="card" style="background:#FFF3C4">
+        <div class="stat" style="color:#9A6B00">2</div><h3 style="font-size:21px;margin:4px 0 10px">Mix-ins from dispensers</h3>
+        <span class="chip plan">plan</span> <b>Automated topping dispensers</b>
+        <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px;font-size:14px">
+          <div style="background:#fff;border-radius:12px;padding:10px"><b>Fresh fruit</b><br>berries, mango, kiwi, pomegranate</div>
+          <div style="background:#fff;border-radius:12px;padding:10px"><b>Crunch</b><br>millet granola, roasted seeds, makhana</div>
+          <div style="background:#fff;border-radius:12px;padding:10px"><b>Protein</b><br>whey crisps, peanut crunch</div>
+          <div style="background:#fff;border-radius:12px;padding:10px"><b>Fun</b><br>mini mochi, tapioca pearls, cacao nibs</div>
+        </div>
+        <p style="font-size:13px;color:#6B5A00;margin:10px 0 0">Toppings from Dubai &amp; UK menus, with Indian swaps like makhana and millet <span class="chip idea">idea</span></p>
+      </div>
+      <div class="card" style="background:#E3DAFF">
+        <div class="stat" style="color:#4B2FC0">3</div><h3 style="font-size:21px;margin:4px 0 10px">Finish &amp; pay by weight</h3>
+        <span class="chip plan">plan</span> <b>Automated sauce dispensers</b>
+        <p style="font-size:15px;margin:10px 0">Dark chocolate · peanut butter · honey · berry compote · date syrup <span class="chip idea">idea</span></p>
+        <div style="background:#fff;border-radius:14px;padding:14px;font-size:14px"><b>How it works:</b> the load cell weighs the cup, the PWA shows the weight, price and kcal, UPI pays, the door unlocks for the next guest.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:26px;margin:36px 0 14px">C · Smoothies, bowls &amp; grab-and-go</h3>
+    <div class="grid g4">
+      <div class="card" style="background:var(--lime)"><span class="chip plan" style="background:#fff">plan</span><h3 style="font-size:20px;margin:8px 0 4px">Smoothie Bowls</h3>Self-serve cups with automated toppings.</div>
+      <div class="card" style="background:var(--lime)"><span class="chip plan" style="background:#fff">plan</span><h3 style="font-size:20px;margin:8px 0 4px">Cold-pressed &amp; RTD shakes</h3>Grab-and-go bottles and functional micro-sachets.</div>
+      <div class="card soft"><span class="chip idea">idea</span><h3 style="font-size:20px;margin:8px 0 4px">Açaí &amp; Greens Bowls</h3>Inspired by Yogurtland's açaí bowls and its pineapple-spinach-kale bowl.</div>
+      <div class="card soft"><span class="chip idea">idea</span><h3 style="font-size:20px;margin:8px 0 4px">Smoothie line-up</h3>Peanut Butter Banana Protein · Berry Recovery · Mango Lassi Protein · Green Detox · Chikoo Oat Shake.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AGES -->
+<section class="soft" id="ages">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#2F5A06">06 · Healthy for all ages</div><h2>One machine, four age modes</h2></div><p>Same froyo, smoothies and taps — tuned per age with portions, sugar and caffeine rules. The PWA offers a "family / kids mode" that hides caffeinated drinks. <span class="chip idea">idea</span></p></div>
+    <div class="grid g4">
+      <div class="age" style="background:var(--pink)">
+        <span class="eyebrow">Little ones · 4–10</span><h3>Mini Swirl</h3>
+        <ul><li>100 g kids cup of plain or Alphonso mango froyo</li><li>Fruit-only toppings, no candy dispenser</li><li>Mango lassi or chikoo oat smoothie</li><li><b>No caffeine</b>: coffee taps hidden in kids mode</li><li>Nut-free topping lane</li></ul>
+      </div>
+      <div class="age" style="background:var(--yuzu)">
+        <span class="eyebrow">Teens &amp; young players · 11–17</span><h3>Match Fuel</h3>
+        <ul><li>Greek froyo + berries + millet granola</li><li>Peanut butter banana protein smoothie</li><li>Pink Salt &amp; Yuzu electrolyte after matches</li><li>Coffee taps hidden by default in family mode</li><li>Calories shown on every cup</li></ul>
+      </div>
+      <div class="age" style="background:var(--lime)">
+        <span class="eyebrow">Adults &amp; athletes · 18–45</span><h3>Performance</h3>
+        <ul><li>Vanilla Proffee (20 g protein) or Nitro (~5 kcal)</li><li>Lion's Mane Focus Brew for deep work</li><li>Kefir or matcha Greek froyo + whey crisps</li><li>Chilli-chaat pineapple sorbet, vegan</li><li>Berry Recovery or Green Detox smoothie</li></ul>
+      </div>
+      <div class="age" style="background:var(--mint)">
+        <span class="eyebrow">45+ &amp; seniors</span><h3>Gentle Fuel</h3>
+        <ul><li>No-added-sugar Greek or kefir froyo (probiotic)</li><li>Oat-milk options for anyone who avoids dairy</li><li>Seeds, nuts &amp; oats for fibre</li><li>Decaf cold brew option</li><li>Smaller 150 ml pours, big-font PWA</li></ul>
+      </div>
+    </div>
+    <div class="card" style="background:#fff;margin-top:20px;display:flex;flex-wrap:wrap;gap:24px;align-items:center">
+      <div style="flex:1 1 320px"><h3 style="font-size:22px">Healthy-by-default rules</h3><p style="margin:6px 0 0;color:var(--muted)">Always one no-added-sugar froyo on. Fruit toppings at eye level, candy lower down. kcal per 100 g on every flavour. Allergen tags (milk, nuts, soy, gluten) on the PWA. Health claims checked with a nutritionist before printing.</p></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><span class="chip" style="background:var(--lime)">0 added sugar base</span><span class="chip" style="background:var(--yuzu)">kcal labels</span><span class="chip" style="background:var(--mint)">allergen tags</span><span class="chip" style="background:var(--pink)">kids mode</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONALISATION -->
+<section class="dark" id="personal">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:var(--mint)">07 · Personalised fuel</div><h2>Your workout picks your drink</h2></div><p>Arjun's idea + Anurag's face login: read wearable data, work out what each person needs today, and have the machine make it — protein, electrolytes, carbs, caffeine or none.</p></div>
+
+    <div class="grid g4">
+      <div class="card" style="background:var(--ink2)"><div class="eyebrow" style="color:var(--mint)">1 · Sync</div><h3 style="font-size:21px;margin:6px 0">Free EnduroBrew app</h3><span style="color:#CFCDE0;font-size:15px">Reads Apple Health (iOS) or Health Connect (Android), plus WHOOP and Garmin accounts. No watch? A 3-tap quiz: sport, minutes, how hard.</span></div>
+      <div class="card" style="background:var(--ink2)"><div class="eyebrow" style="color:var(--yuzu)">2 · Compute</div><h3 style="font-size:21px;margin:6px 0">Fuel Engine</h3><span style="color:#CFCDE0;font-size:15px">Turns today's workout, sleep, body weight, goal, diet and venue weather into a recipe — always inside safe ranges set with a sports dietitian.</span></div>
+      <div class="card" style="background:var(--ink2)"><div class="eyebrow" style="color:var(--coral)">3 · Identify</div><h3 style="font-size:21px;margin:6px 0">QR first, face later</h3><span style="color:#CFCDE0;font-size:15px">Show a 30-second QR from the app at the machine. Opt-in face "Express" for regulars at gyms, with a phone tap to confirm.</span></div>
+      <div class="card" style="background:var(--ink2)"><div class="eyebrow" style="color:var(--lime)">4 · Dispense</div><h3 style="font-size:21px;margin:6px 0">Machine makes it</h3><span style="color:#CFCDE0;font-size:15px">Base (shake, smoothie bowl, froyo, cold brew, electrolyte) + dosing pumps add exact protein, electrolytes, carbs or a caffeine shot.</span></div>
+    </div>
+
+    <!-- LINC vs ENDUROBREW -->
+    <h3 style="font-size:28px;margin:36px 0 6px">Personalisation like LINC — rebuilt for India</h3>
+    <p style="color:#CFCDE0;margin:0 0 14px;max-width:820px">LINC (US) proved the idea: sync your body data, get a drink made for you each day. EnduroBrew takes the same brain and puts it inside a public machine network at the places Indians already work out.</p>
+    <div class="card" style="background:#fff;color:var(--ink)"><div class="tbl-box"><table>
+      <thead><tr><th style="width:170px"></th><th style="background:#F1EDFF">LINC (US)</th><th style="background:#E6F7C2">EnduroBrew (India)</th></tr></thead>
+      <tbody>
+        <tr><td><b>What it is</b></td><td>A home "connected supplement system" that prepares and dispenses one personalised drink a day</td><td>A network of smart tap walls &amp; vending units at gyms, padel/pickleball clubs and tech parks</td></tr>
+        <tr><td><b>Data in</b></td><td>Survey baseline + Apple Health, WHOOP, Oura; designed to add blood work</td><td>Profile + Apple Health, Health Connect (Samsung, Fitbit, many Android watches), WHOOP, Garmin; 3-tap quiz for anyone without a watch; lab reports in phase 4</td></tr>
+        <tr><td><b>What comes out</b></td><td>A supplement drink, "no pills, powders"</td><td>Food-first: protein shake, smoothie bowl, froyo, cold brew or electrolyte — plus exact add-ins (protein, electrolytes, carbs, caffeine)</td></tr>
+        <tr><td><b>Safety</b></td><td>Adjusts "within defined safety ranges"; designed for adults</td><td>Dietitian-set caps in the cloud <i>and</i> machine firmware; age modes; no caffeine for under-18s</td></tr>
+        <tr><td><b>Who it knows you are</b></td><td>Your own machine (passcode lock)</td><td>Shared machines → rotating QR, UPI ID, NFC, or opt-in face Express</td></tr>
+        <tr><td><b>Status</b></td><td>Early-access waitlist; no public price</td><td>14-day pilot → 25 machines in year one</td></tr>
+        <tr><td><b>Money</b></td><td>Device + supplement plan (not disclosed)</td><td>Pay per drink, Fuel Pass subscription, brand cartridges, 15% venue revenue share</td></tr>
+      </tbody>
+    </table></div></div>
+
+    <!-- END-TO-END WORKFLOW -->
+    <h3 style="font-size:28px;margin:36px 0 6px">End-to-end workflow: watch → app → cloud → machine</h3>
+    <p style="color:#CFCDE0;margin:0 0 14px;max-width:820px">Four lanes, four moments. Read top to bottom; each card sits in the lane that does the work.</p>
+    <div class="card" style="background:#fff;color:var(--ink);padding:18px">
+      <div class="tbl-box">
+        <div style="display:grid;grid-template-columns:150px repeat(4,minmax(170px,1fr));gap:8px;min-width:900px;font-size:14px;line-height:1.45">
+          <div></div>
+          <div style="background:#F7D9FF;border-radius:12px;padding:10px;font-weight:700;text-align:center">Person + watch</div>
+          <div style="background:#DDE3FF;border-radius:12px;padding:10px;font-weight:700;text-align:center">EnduroBrew app</div>
+          <div style="background:#FFF3C4;border-radius:12px;padding:10px;font-weight:700;text-align:center">Cloud · Fuel Engine</div>
+          <div style="background:#E6F7C2;border-radius:12px;padding:10px;font-weight:700;text-align:center">Vending machine</div>
+
+          <div style="grid-column:1 / -1;font-family:var(--display);font-weight:700;font-size:16px;margin-top:8px;color:#4B2FC0">A · Sign up (once, 2 minutes)</div>
+          <div style="font-weight:700;color:var(--muted)">A1</div>
+          <div style="border:2px solid #E2B6F2;border-radius:12px;padding:10px">Downloads free app, signs up with phone OTP</div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Consent screens: health data ✔, face (optional) ☐ — in English / Hindi / Kannada</div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Creates profile: weight, goal, veg/vegan/Jain, allergies, age band</div>
+          <div></div>
+          <div style="font-weight:700;color:var(--muted)">A2</div>
+          <div></div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Connects Apple Health / Health Connect / WHOOP / Garmin — or picks "no watch"</div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Stores API tokens securely; builds a 7-day baseline</div>
+          <div></div>
+          <div style="font-weight:700;color:var(--muted)">A3</div>
+          <div style="border:2px solid #E2B6F2;border-radius:12px;padding:10px">Optional: takes a selfie for face Express</div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Turns selfie into an encrypted face template; photo deleted</div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Sends template only to your home-venue machines</div>
+          <div style="border:2px solid #B5E37A;border-radius:12px;padding:10px">Keeps template on-device for 1-second matching</div>
+
+          <div style="grid-column:1 / -1;font-family:var(--display);font-weight:700;font-size:16px;margin-top:8px;color:#4B2FC0">B · After the workout (automatic)</div>
+          <div style="font-weight:700;color:var(--muted)">B1</div>
+          <div style="border:2px solid #E2B6F2;border-radius:12px;padding:10px">Finishes 75 min padel; watch saves HR, kcal, duration</div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Reads the workout + last night's sleep in the background</div>
+          <div></div><div></div>
+          <div style="font-weight:700;color:var(--muted)">B2</div>
+          <div></div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Sends only a summary: "padel, 75 min, high, 640 kcal, 6 h sleep"</div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Fuel Engine: workout + profile + venue weather → recipe, checked against safety caps</div>
+          <div></div>
+          <div style="font-weight:700;color:var(--muted)">B3</div>
+          <div style="border:2px solid #E2B6F2;border-radius:12px;padding:10px">Gets a nudge: "Your post-padel mango bowl is ready"</div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Can tweak, pre-order and pay (UPI or Fuel Pass credit)</div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Reserves stock at the nearest machine</div>
+          <div style="border:2px solid #B5E37A;border-radius:12px;padding:10px">Holds the order for 30 minutes</div>
+
+          <div style="grid-column:1 / -1;font-family:var(--display);font-weight:700;font-size:16px;margin-top:8px;color:#4B2FC0">C · At the machine (under 45 seconds)</div>
+          <div style="font-weight:700;color:var(--muted)">C1</div>
+          <div style="border:2px solid #E2B6F2;border-radius:12px;padding:10px">Walks up; holds up phone QR — or just looks at the camera</div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Shows a signed QR that changes every 30 s (works offline briefly)</div>
+          <div></div>
+          <div style="border:2px solid #B5E37A;border-radius:12px;padding:10px">Camera reads QR, or matches face on-device</div>
+          <div style="font-weight:700;color:var(--muted)">C2</div>
+          <div></div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Face match? Push "Is this you?" — one tap to confirm</div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Verifies token; returns today's recipe</div>
+          <div style="border:2px solid #B5E37A;border-radius:12px;padding:10px">Screen: "Hi Priya · Mango protein bowl + electrolytes" · Accept / Swap</div>
+          <div style="font-weight:700;color:var(--muted)">C3</div>
+          <div style="border:2px solid #E2B6F2;border-radius:12px;padding:10px">Taps Accept (already paid, or 1-tap UPI now)</div>
+          <div></div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Payment webhook → sends signed "dispense" command over MQTT</div>
+          <div style="border:2px solid #B5E37A;border-radius:12px;padding:10px">ESP32 runs dosing pumps: base + protein + electrolytes; flow meter &amp; load cell check the dose; door unlocks</div>
+
+          <div style="grid-column:1 / -1;font-family:var(--display);font-weight:700;font-size:16px;margin-top:8px;color:#4B2FC0">D · After (the loop closes)</div>
+          <div style="font-weight:700;color:var(--muted)">D1</div>
+          <div></div><div></div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Logs exact dose; updates stock; triggers restock route if low</div>
+          <div style="border:2px solid #B5E37A;border-radius:12px;padding:10px">Reports actual ml / grams dispensed</div>
+          <div style="font-weight:700;color:var(--muted)">D2</div>
+          <div style="border:2px solid #E2B6F2;border-radius:12px;padding:10px">Sees protein &amp; hydration for the day; streaks &amp; rewards</div>
+          <div style="border:2px solid #B9C4FF;border-radius:12px;padding:10px">Writes the nutrition back to Apple Health / Health Connect</div>
+          <div style="border:2px solid #F2DB7A;border-radius:12px;padding:10px">Learns taste &amp; timing; weekly fuel report</div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MACHINE ADDITIONS -->
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card" style="background:var(--ink2)">
+        <div class="eyebrow" style="color:var(--lime)">What the machine needs</div>
+        <h3 style="font-size:22px;margin:6px 0 10px">Hardware added for personalisation</h3>
+        <ul style="margin:0;padding-left:18px;color:#E4E2F0;font-size:15px;line-height:1.7">
+          <li><b>Camera</b> for QR (and later face, with an edge-AI chip)</li>
+          <li><b>Touch screen</b> showing name, recipe, Accept / Swap</li>
+          <li><b>4–6 peristaltic dosing pumps:</b> protein concentrate, electrolyte, carb syrup, espresso shot, flavour</li>
+          <li><b>Flow meters + load cell</b> to verify every dose</li>
+          <li><b>NFC reader</b> (phase 2) and 4G modem for uptime</li>
+        </ul>
+      </div>
+      <div class="card" style="background:var(--ink2)">
+        <div class="eyebrow" style="color:var(--yuzu)">What the software adds</div>
+        <h3 style="font-size:22px;margin:6px 0 10px">On top of your existing stack</h3>
+        <ul style="margin:0;padding-left:18px;color:#E4E2F0;font-size:15px;line-height:1.7">
+          <li><b>Mobile app</b> (iOS + Android) with HealthKit &amp; Health Connect SDKs</li>
+          <li><b>Wearable connectors:</b> WHOOP &amp; Garmin cloud APIs</li>
+          <li><b>Fuel Engine:</b> rules + caps first, ML on preferences later</li>
+          <li><b>Identity service:</b> signed rotating QR, UPI-ID link, face templates</li>
+          <li><b>Consent manager:</b> DPDP-style notices, per-purpose opt-in, delete-my-data</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="background:#fff;color:var(--ink);margin-top:20px">
+      <h3 style="font-size:22px;margin-bottom:12px">Example: Priya after 75 minutes of padel on a hot evening</h3>
+      <div class="grid g4" style="font-size:15px">
+        <div style="background:#F1EDFF;border-radius:16px;padding:16px"><b>Watch says</b><br>75 min · avg HR 148 · 640 kcal · 31 °C at venue · slept 6 h</div>
+        <div style="background:#FFF3C4;border-radius:16px;padding:16px"><b>Profile says</b><br>58 kg · goal: lean muscle · vegetarian · no nut allergy</div>
+        <div style="background:#E6F7C2;border-radius:16px;padding:16px"><b>Screen suggests</b><br>Mango protein smoothie bowl + extra electrolytes · no caffeine (it's 8 pm)</div>
+        <div style="background:#DFFBF2;border-radius:16px;padding:16px"><b>She taps</b><br>Accept or swap → UPI or subscription credit → bowl ready, logged back to her app</div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin:12px 0 0">Illustrative. Actual protein, sodium and carb ranges must be set and signed off by a qualified sports dietitian before launch.</p>
+    </div>
+
+    <h3 style="font-size:24px;margin:32px 0 14px">How the machine knows it's you — options compared</h3>
+    <div class="card" style="background:#fff;color:var(--ink)"><div class="tbl-box"><table>
+      <thead><tr><th>Option</th><th>Speed</th><th>Privacy</th><th>Cost per machine</th><th>Works without phone?</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td><b>QR from app</b> (rotating, 30 s)</td><td>~3 s</td><td><span class="chip" style="background:var(--lime)">Best</span></td><td>Uses existing camera</td><td>No</td><td><b>Launch with this</b></td></tr>
+        <tr><td><b>UPI = identity</b> (link your UPI ID once)</td><td>Same as paying</td><td><span class="chip" style="background:var(--lime)">Good</span></td><td>₹0</td><td>No</td><td>Great fallback: personalise after the first payment</td></tr>
+        <tr><td><b>NFC tap</b> (phone or band)</td><td>~1 s</td><td><span class="chip" style="background:var(--lime)">Good</span></td><td>Small NFC reader</td><td>Yes, with a band</td><td>Phase 2 for gym members</td></tr>
+        <tr><td><b>Face "Express"</b> (opt-in)</td><td>~1 s, hands-free</td><td><span class="chip" style="background:var(--coral)">Sensitive</span></td><td>Better camera + edge AI chip</td><td>Yes</td><td>Phase 3: on-device match, confirm on phone, delete anytime</td></tr>
+      </tbody>
+    </table></div></div>
+
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card" style="background:var(--ink2)">
+        <div class="eyebrow" style="color:var(--yuzu)">Why it fixes the volume risk</div>
+        <h3 style="font-size:22px;margin:6px 0 10px">Subscriptions</h3>
+        <span style="color:#CFCDE0;font-size:15px">A monthly "Fuel Pass" with daily drink credits turns one-off buyers into daily regulars — the 30 cups/day pilot target gets much easier. Lower-ticket protein &amp; electrolyte shots also open the mass protein-powder market, as Arjun suggested.</span>
+      </div>
+      <div class="card" style="background:var(--ink2)">
+        <div class="eyebrow" style="color:var(--mint)">Partner model</div>
+        <h3 style="font-size:22px;margin:6px 0 10px">Brand cartridges</h3>
+        <span style="color:#CFCDE0;font-size:15px">Protein and electrolyte brands supply sealed cartridges and pay for placement or data-free co-marketing. Customers pick "brand X protein" on screen; you earn a margin plus a listing fee.</span>
+      </div>
+      <div class="card" style="background:var(--ink2)">
+        <div class="eyebrow" style="color:var(--coral)">Benchmark</div>
+        <h3 style="font-size:22px;margin:6px 0 10px">LINC (US)</h3>
+        <span style="color:#CFCDE0;font-size:15px">A home "connected supplement system": survey baseline, Apple Health / WHOOP / Oura sync, a daily drink adjusted within safety ranges. Waitlist only, adults only. EnduroBrew = the same idea as a <b style="color:#fff">public machine network for India</b>, food-first (shakes, bowls, froyo) rather than supplements.</span>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card" style="background:#fff;color:var(--ink)">
+        <h3 style="font-size:22px;margin-bottom:10px">India reality check</h3>
+        <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7">
+          <li><b>Most Indian smartwatches are budget brands:</b> Noise (26.6%), boAt (14.1%) and Fire-Boltt (9.7%) led 2025 shipments. Test whether their apps write to Health Connect — if not, the quiz path must be great.</li>
+          <li><b>Apple Health has no server API:</b> data comes through our iOS app, on-device.</li>
+          <li><b>Garmin</b> reopened its developer program on 21 Oct 2026 with Personal, Starter and Enterprise tiers — apply early.</li>
+          <li><b>WHOOP</b> has a developer platform; members must opt in to share.</li>
+        </ul>
+      </div>
+      <div class="card" style="background:#fff;color:var(--ink)">
+        <h3 style="font-size:22px;margin-bottom:10px">Privacy by design (DPDP Rules 2025)</h3>
+        <ul style="margin:0;padding-left:18px;font-size:15px;line-height:1.7">
+          <li>India's DPDP Rules were notified in Nov 2025 with an 18-month phased rollout: short consent notices, clear purposes, Indian-language options.</li>
+          <li>Face data and health data are personal data: separate, explicit opt-in for each; easy delete.</li>
+          <li>Keep raw wearable data on the phone; send only today's "fuel needs" to the cloud.</li>
+          <li>Face: store an encrypted template, never photos; match on the machine; always a non-face option.</li>
+          <li>Lab reports: later, reviewed by a dietitian partner; wellness advice, not medical treatment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:24px;margin:32px 0 14px">Rollout</h3>
+    <div class="grid g4">
+      <div class="card" style="background:var(--lime);color:var(--ink)"><div class="eyebrow">Pilot · Month 1–2</div><b>3-tap quiz on the machine's web page</b><br><span style="font-size:14px">Sport, minutes, intensity → a suggested drink + add-in. No app, no data stored.</span></div>
+      <div class="card" style="background:var(--yuzu);color:var(--ink)"><div class="eyebrow">Phase 2 · Month 3–6</div><b>App + QR + Fuel Pass</b><br><span style="font-size:14px">Apple Health, Health Connect, WHOOP. Dosing pumps for protein &amp; electrolytes.</span></div>
+      <div class="card" style="background:var(--coral);color:var(--ink)"><div class="eyebrow">Phase 3 · Month 6–9</div><b>Garmin, NFC, face Express</b><br><span style="font-size:14px">Opt-in face at partner gyms; brand cartridges.</span></div>
+      <div class="card" style="background:var(--mint);color:var(--ink)"><div class="eyebrow">Phase 4 · Month 9–12</div><b>Labs &amp; corporate wellness</b><br><span style="font-size:14px">Dietitian-reviewed lab uploads; company-paid Fuel Pass for tech parks.</span></div>
+    </div>
+
+    <h3 style="font-size:24px;margin:32px 0 14px">What could go wrong</h3>
+    <div class="card" style="background:#fff;color:var(--ink)"><div class="tbl-box"><table>
+      <thead><tr><th>Failure</th><th>Effect</th><th>Guard</th></tr></thead>
+      <tbody>
+        <tr><td>Wrong person matched by face</td><td>Someone gets another's drink or sees their data</td><td>Phone confirmation before any data shows; screen shows first name + recipe only</td></tr>
+        <tr><td>Wearable data missing or stale</td><td>Bad or no suggestion</td><td>Fall back to the 3-tap quiz; show "based on today's quiz"</td></tr>
+        <tr><td>Recipe outside safe range</td><td>Too much caffeine, sodium or protein</td><td>Hard caps in firmware and server; no caffeine for under-18s or after a set hour</td></tr>
+        <tr><td>Allergen cross-contact in dosing lines</td><td>Allergic reaction</td><td>Separate lines for nut/dairy-free; flush cycle; allergen warnings on screen</td></tr>
+        <tr><td>Phone offline at the machine</td><td>QR can't refresh</td><td>Offline-valid signed QR codes for a few minutes; UPI-ID fallback</td></tr>
+        <tr><td>Data breach</td><td>Health + face data leak, DPDP penalties</td><td>Minimal data, encryption, on-device processing, breach plan</td></tr>
+      </tbody>
+    </table></div></div>
+    <div class="src" style="color:#9A97AE">Sources: drinklinc.com · Open Wearables / Sahha (Apple Health, Health Connect, WHOOP) · WHOOP Developer Platform · Garmin reopening via Open Wearables &amp; the5krunner · IDC India wearables 2025 · DPDP Rules 2025 (Hogan Lovells, Chronicle India, ID Tech, Ujjivan SFB). Fuel Engine, identity options, Fuel Pass and rollout are our own design.</div>
+  </div>
+</section>
+
+<!-- ECONOMICS -->
+<section id="economics">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#D2401F">08 · Unit economics (per machine / month)</div><h2>Your plan vs a reality check</h2></div><p>The margins hold up. Volume is the big bet — 80 cups a day from day one is very aggressive for a new machine.</p></div>
+    <div class="grid g2">
+      <div class="card soft">
+        <h3 style="font-size:22px;margin-bottom:10px">Your plan, as written</h3>
+        <div class="tbl-box"><table>
+          <thead><tr><th>Metric</th><th style="text-align:right">Tap wall (5 taps)</th><th style="text-align:right">Smart vending</th></tr></thead>
+          <tbody>
+            <tr><td>CapEx</td><td style="text-align:right">₹1,20,000</td><td style="text-align:right">₹95,000</td></tr>
+            <tr><td>Daily sales × ticket</td><td style="text-align:right">80 cups × ₹150</td><td style="text-align:right">65 items × ₹160</td></tr>
+            <tr><td>Monthly revenue</td><td style="text-align:right">₹3,60,000</td><td style="text-align:right">₹3,12,000</td></tr>
+            <tr><td>COGS 30%</td><td style="text-align:right">− ₹1,08,000</td><td style="text-align:right">− ₹93,600</td></tr>
+            <tr><td>Venue share 15%</td><td style="text-align:right">− ₹54,000</td><td style="text-align:right">− ₹46,800</td></tr>
+            <tr style="font-weight:700"><td>Net profit</td><td style="text-align:right">₹1,98,000</td><td style="text-align:right">₹1,71,600</td></tr>
+          </tbody>
+        </table></div>
+        <p style="color:#8A2A12;font-weight:600;font-size:14px;margin:12px 0 0">Missing: wastage, payment gateway fees, restocking runs, maintenance, gas refills, IoT/cloud.</p>
+      </div>
+      <div class="card soft">
+        <h3 style="font-size:22px">Tap wall net profit by scenario</h3>
+        <p style="margin:4px 0 0;color:var(--muted);font-size:14px">₹ per month · payback on ₹1.2 L CapEx under each bar</p>
+        <svg role="img" aria-label="Bar chart of tap wall monthly net profit: plan as written 1.98 lakh rupees, 0.6 months payback; plan with real costs 1.62 lakh, 0.7 months; realistic 30 cups a day 45,700 rupees, 2.6 months; cautious 12 cups a day 10,600 rupees, 11.3 months" viewBox="0 0 580 330" width="100%">
+          <line x1="10" y1="280" x2="570" y2="280" stroke="#14121F" stroke-width="2"/>
+          <rect x="30" y="20" width="100" height="260" rx="10" fill="#DCDAE6" stroke="#14121F" stroke-width="1.5"/><rect x="170" y="68" width="100" height="212" rx="10" fill="#FFD447" stroke="#14121F" stroke-width="1.5"/><rect x="310" y="220" width="100" height="60" rx="10" fill="#C8F169" stroke="#14121F" stroke-width="1.5"/><rect x="450" y="266" width="100" height="14" rx="4" fill="#FF6B4A" stroke="#14121F" stroke-width="1.5"/>
+          <g font-family="Space Grotesk" font-size="18" font-weight="700" text-anchor="middle" fill="#14121F"><text x="80" y="14">₹1.98 L</text><text x="220" y="60">₹1.62 L</text><text x="360" y="212">₹45.7 K</text><text x="500" y="258">₹10.6 K</text></g>
+          <g font-size="12" font-weight="700" text-anchor="middle" fill="#14121F"><text x="80" y="300">Plan · 80 cups</text><text x="220" y="300">Plan + real costs</text><text x="360" y="300">Realistic · 30 cups</text><text x="500" y="300">Cautious · 12 cups</text></g>
+          <g font-size="12" text-anchor="middle" fill="#5E5B70"><text x="80" y="320">0.6 mo payback</text><text x="220" y="320">0.7 mo</text><text x="360" y="320">2.6 mo</text><text x="500" y="320">11.3 mo</text></g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="card soft" style="margin-top:20px">
+      <h3 style="font-size:22px">Where every ₹100 goes — realistic tap wall (30 cups × ₹130 = ₹1.17 L / month)</h3>
+      <div role="img" aria-label="Stacked bar: ingredients 30 rupees, waste 5, venue share 15, payment fee 2.4, operations 8.5, your profit 39 out of every 100 rupees" style="display:flex;height:60px;border-radius:14px;overflow:hidden;border:2px solid var(--ink);margin-top:14px;font-weight:700;font-size:14px">
+        <div style="flex:30;background:var(--espresso);color:#fff;display:flex;align-items:center;justify-content:center">Ingredients ₹30</div>
+        <div style="flex:5;background:#A07A60;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px">5</div>
+        <div style="flex:15;background:var(--coral);display:flex;align-items:center;justify-content:center">Venue ₹15</div>
+        <div style="flex:2.4;background:var(--cobalt)"></div>
+        <div style="flex:8.5;background:var(--yuzu);display:flex;align-items:center;justify-content:center;font-size:12px">Ops 8.5</div>
+        <div style="flex:39;background:var(--lime);display:flex;align-items:center;justify-content:center;font-size:16px">Your profit ₹39</div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin:10px 0 0">Brown-grey = waste 5%. Blue sliver = payment gateway ₹2.4 (Razorpay's 2% platform fee on UPI + 18% GST). Ops ≈ ₹10 K/machine/month for restocking, cleaning, N₂/CO₂, repairs, SIM and cloud (our estimate).</p>
+    </div>
+
+    <div class="card" style="margin-top:20px;background:#F1EDFF">
+      <h3 style="font-size:22px;margin-bottom:6px">Try it: tap wall profit calculator</h3>
+      <p style="margin:0 0 16px;color:var(--muted);font-size:14px">Uses 30% ingredients, 5% waste, 15% venue, 2.36% payment fee and ₹10 K monthly ops.</p>
+      <div class="calc">
+        <div><label for="cups">Cups per day: <span id="cupsV">30</span></label><input id="cups" type="range" min="5" max="100" value="30"></div>
+        <div><label for="ticket">Average ticket: ₹<span id="ticketV">130</span></label><input id="ticket" type="range" min="80" max="200" step="5" value="130"></div>
+        <div class="out"><span style="font-size:13px;color:var(--muted)">Monthly revenue</span><b id="rev">₹1,17,000</b></div>
+        <div class="out" style="background:var(--lime)"><span style="font-size:13px">Monthly net profit</span><b id="net">₹45,739</b></div>
+        <div class="out" style="background:var(--yuzu)"><span style="font-size:13px">Payback on ₹1.2 L</span><b id="pay">2.6 months</b></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card" style="border:2px solid var(--ink)">
+        <h3 style="font-size:22px;margin-bottom:12px">The cups-per-day ladder (₹130 ticket)</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:14px;align-items:center"><span class="stat" style="font-size:22px;width:80px;text-align:center;background:var(--coral);border-radius:10px;padding:6px 0">6</span>covers running costs</div>
+          <div style="display:flex;gap:14px;align-items:center"><span class="stat" style="font-size:22px;width:80px;text-align:center;background:var(--yuzu);border-radius:10px;padding:6px 0">11</span>pays back the machine in 12 months</div>
+          <div style="display:flex;gap:14px;align-items:center"><span class="stat" style="font-size:22px;width:80px;text-align:center;background:var(--mint);border-radius:10px;padding:6px 0">16</span>pays back in 6 months</div>
+          <div style="display:flex;gap:14px;align-items:center"><span class="stat" style="font-size:22px;width:80px;text-align:center;background:var(--lime);border-radius:10px;padding:6px 0">30</span>under 3 months — <b>pilot target</b></div>
+          <div style="display:flex;gap:14px;align-items:center"><span class="stat" style="font-size:22px;width:80px;text-align:center;background:#DCDAE6;border-radius:10px;padding:6px 0">80</span>your plan's number — prove it first</div>
+        </div>
+      </div>
+      <div class="card dark">
+        <div class="eyebrow" style="color:var(--yuzu)">Benchmark check</div>
+        <h3 style="font-size:28px;margin:8px 0">India's largest smart-vending network makes about ₹26 K per machine a month</h3>
+        <p style="color:#CFCDE0;margin:0">Daalchini: ₹140 Cr FY26 revenue across ~3,400 → 5,500 machines. Your plan expects ₹3.6 L per machine — about 14× more. Premium drinks at sports venues can beat an office snack machine, but the gap is why the pilot must measure real daily volume first.</p>
+        <p style="font-size:12px;color:#9A97AE;margin:10px 0 0">₹140 Cr ÷ ~4,450 average machines ÷ 12. Rough; includes machine sales and rentals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="soft" id="roadmap">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#4B2FC0">09 · Roadmap</div><h2>14-day sprint → 25 machines</h2></div><p>Each phase ends at a gate. Only buy the next machines once the last ones hit their numbers.</p></div>
+    <div class="card" style="background:#fff">
+      <h3 style="font-size:22px;margin-bottom:12px">The 14-day sprint (from your plan)</h3>
+      <div class="tbl-box"><div class="gantt">
+        <span class="d">D1</span><span class="d">D2</span><span class="d">D3</span><span class="d">D4</span><span class="d">D5</span><span class="d">D6</span><span class="d">D7</span><span class="d">D8</span><span class="d">D9</span><span class="d">D10</span><span class="d">D11</span><span class="d">D12</span><span class="d">D13</span><span class="d">D14</span>
+        <div class="bar" style="grid-column:1 / span 4;background:var(--cobalt);color:#fff"><b>IT &amp; sourcing</b><br>PWA checkout + flow-meter test with water &amp; cold brew</div>
+        <div class="bar" style="grid-column:5 / span 4;background:var(--coral)"><b>Sales push</b><br>Pitch 10 clubs &amp; gyms the zero-capex deal</div>
+        <div class="bar" style="grid-column:9 / span 3;background:var(--violet);color:#fff"><b>Marketing</b><br>QR wraps &amp; hooks</div>
+        <div class="bar" style="grid-column:12 / span 3;background:var(--lime)"><b>Pilot launch</b><br>Install #1, QR drop</div>
+      </div></div>
+    </div>
+    <div class="grid g4" style="margin-top:20px">
+      <div class="card" style="background:#fff;border-top:8px solid var(--lime)"><div class="eyebrow" style="color:var(--muted)">Month 1–2 · Pilot</div><h3 style="font-size:22px;margin:6px 0">1–2 machines</h3><p style="margin:0 0 10px;font-size:14px">One padel/pickleball club, one gym. Measure cups/day, repeat buyers, best sellers, failed pours.</p><span class="chip" style="background:#EEF9D6">Gate: 25+ cups/day for 4 weeks</span></div>
+      <div class="card" style="background:#fff;border-top:8px solid var(--yuzu)"><div class="eyebrow" style="color:var(--muted)">Month 3–4 · Prove</div><h3 style="font-size:22px;margin:6px 0">3–5 machines</h3><p style="margin:0 0 10px;font-size:14px">Add a tech park and a clubhouse. FSSAI licence, GST, venue contract, price tests, first froyo bar.</p><span class="chip" style="background:#FFF6D1">Gate: each site pays back &lt; 6 months</span></div>
+      <div class="card" style="background:#fff;border-top:8px solid var(--coral)"><div class="eyebrow" style="color:var(--muted)">Month 5–8 · City</div><h3 style="font-size:22px;margin:6px 0">10–15 machines</h3><p style="margin:0 0 10px;font-size:14px">One Bengaluru cluster, one restock runner on an auto-planned route, central cold-brew &amp; froyo batching.</p><span class="chip" style="background:#FFE3DB">Gate: 95%+ uptime, ops &lt; ₹10 K</span></div>
+      <div class="card" style="background:#fff;border-top:8px solid var(--cobalt)"><div class="eyebrow" style="color:var(--muted)">Month 9–12 · Scale</div><h3 style="font-size:22px;margin:6px 0">25+ machines</h3><p style="margin:0 0 10px;font-size:14px">Second city or franchise model. Use pilot data to raise seed or machine financing.</p><span class="chip" style="background:#E1E6FF">Gate: 6+ months of real numbers</span></div>
+    </div>
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card" style="background:#fff">
+        <h3 style="font-size:22px">Suggested fleet build-up</h3>
+        <svg role="img" aria-label="Bar chart of suggested machines live by month: 1, 2, 3, 5, 7, 10, 12, 15, 18, 21, 23, 25 for months 1 to 12" viewBox="0 0 580 200" width="100%">
+          <line x1="0" y1="170" x2="580" y2="170" stroke="#14121F" stroke-width="2"/>
+          <rect x="8" y="164" width="32" height="6" rx="3" fill="#C8F169"/><rect x="56" y="158" width="32" height="12" rx="4" fill="#C8F169"/><rect x="104" y="152" width="32" height="18" rx="4" fill="#FFD447"/><rect x="152" y="140" width="32" height="30" rx="4" fill="#FFD447"/><rect x="200" y="128" width="32" height="42" rx="4" fill="#FF6B4A"/><rect x="248" y="110" width="32" height="60" rx="4" fill="#FF6B4A"/><rect x="296" y="98" width="32" height="72" rx="4" fill="#FF6B4A"/><rect x="344" y="80" width="32" height="90" rx="4" fill="#FF6B4A"/><rect x="392" y="62" width="32" height="108" rx="4" fill="#3D5AFE"/><rect x="440" y="44" width="32" height="126" rx="4" fill="#3D5AFE"/><rect x="488" y="32" width="32" height="138" rx="4" fill="#3D5AFE"/><rect x="536" y="20" width="32" height="150" rx="4" fill="#3D5AFE"/>
+          <g font-family="Space Grotesk" font-weight="700" text-anchor="middle" fill="#14121F"><text x="552" y="14" font-size="16">25</text><text x="264" y="104" font-size="14">10</text></g>
+          <g font-size="11" text-anchor="middle" fill="#5E5B70"><text x="24" y="190">M1</text><text x="120" y="190">M3</text><text x="216" y="190">M5</text><text x="312" y="190">M7</text><text x="408" y="190">M9</text><text x="504" y="190">M11</text></g>
+        </svg>
+      </div>
+      <div class="card dark">
+        <h3 style="font-size:22px;margin-bottom:14px">What year one could look like</h3>
+        <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+          <div style="background:var(--ink2);border-radius:16px;padding:16px"><div class="stat" style="color:var(--lime)">₹30 L</div><span style="font-size:13px;color:#CFCDE0">CapEx for 25 tap walls</span></div>
+          <div style="background:var(--ink2);border-radius:16px;padding:16px"><div class="stat" style="color:var(--yuzu)">₹11.4 L</div><span style="font-size:13px;color:#CFCDE0">monthly profit if all hit 30 cups/day</span></div>
+          <div style="background:var(--ink2);border-radius:16px;padding:16px"><div class="stat" style="color:#FF8A70">₹2.6 L</div><span style="font-size:13px;color:#CFCDE0">monthly profit at only 12 cups/day</span></div>
+          <div style="background:var(--ink2);border-radius:16px;padding:16px"><div class="stat" style="color:var(--mint)">3</div><span style="font-size:13px;color:#CFCDE0">venue types tested before scaling</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH -->
+<section id="tech">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:var(--cobalt)">10 · Tech stack</div><h2>Built by IT, end to end</h2></div><p>Zero app download. A webhook confirms payment, then MQTT tells the machine to pour or unlock.</p></div>
+    <div class="grid g4">
+      <div class="card" style="background:#F7D9FF"><div class="eyebrow">1 · Customer</div><h3 style="font-size:20px;margin:6px 0">Phone scans QR / NFC</h3>Opens a PWA with live stock, prices, kcal and allergens.</div>
+      <div class="card" style="background:#DDE3FF"><div class="eyebrow">2 · Payment</div><h3 style="font-size:20px;margin:6px 0">1-tap UPI</h3>Razorpay / Cashfree. Pre-auth hold for pay-by-volume and pay-by-weight.</div>
+      <div class="card" style="background:#E6F7C2"><div class="eyebrow">3 · Cloud</div><h3 style="font-size:20px;margin:6px 0">AWS / Node.js</h3>Inventory tracking, low-stock &amp; fault alerts, automated restock routes.</div>
+      <div class="card" style="background:#FFF3C4"><div class="eyebrow">4 · Machine</div><h3 style="font-size:20px;margin:6px 0">ESP32 / Raspberry Pi</h3>Solenoid flow meters, door locks, load cells, temperature &amp; pressure sensors.</div>
+    </div>
+    <div class="card soft" style="margin-top:16px;font-size:15px"><b>New for the froyo bar &amp; all-ages menu</b> <span class="chip idea">idea</span>: load cell under the cup for pay-by-weight · "kids mode" toggle that hides caffeinated taps · kcal per 100 g and allergen tags from the inventory engine · auto-release of the UPI hold if no pour is confirmed in 60 s.</div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section class="soft" id="risks">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#D2401F">11 · Risks &amp; validation</div><h2>What could break — and cheap tests</h2></div></div>
+    <div class="card" style="background:#fff"><div class="tbl-box"><table>
+      <thead><tr><th>Risk</th><th>What goes wrong</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td><b>Low daily volume</b></td><td>A club sells 10 cups a day, not 80. Payback slides past a year.</td><td><span class="chip" style="background:var(--coral)">High</span></td><td><span class="chip" style="background:var(--coral)">High</span></td><td>Pick venues by counted footfall, phase gates, movable machines.</td></tr>
+        <tr><td><b>Food safety</b></td><td>Froyo, whey and dairy lines grow bacteria; one sick customer ends the deal.</td><td><span class="chip" style="background:var(--yuzu)">Medium</span></td><td><span class="chip" style="background:var(--coral)">High</span></td><td>FSSAI registration/licence (licence above ₹12 L a year per machine), daily cleaning logs, temperature sensor auto-locks.</td></tr>
+        <tr><td><b>Paid but no pour</b></td><td>UPI succeeds, valve or door fails.</td><td><span class="chip" style="background:var(--yuzu)">Medium</span></td><td><span class="chip" style="background:var(--yuzu)">Medium</span></td><td>Pre-auth hold auto-releases; heartbeat alerts; spare valve kit per cluster.</td></tr>
+        <tr><td><b>Restock &amp; spoilage</b></td><td>Short shelf life for cold brew, froyo and fresh fruit; scattered sites cost more to service.</td><td><span class="chip" style="background:var(--coral)">High</span></td><td><span class="chip" style="background:var(--yuzu)">Medium</span></td><td>Cluster sites within 5 km, telemetry-led restocking, start with long-life SKUs.</td></tr>
+        <tr><td><b>Kids &amp; caffeine</b></td><td>A child buys a nootropic or caffeinated coffee.</td><td><span class="chip" style="background:var(--yuzu)">Medium</span></td><td><span class="chip" style="background:var(--yuzu)">Medium</span></td><td>Kids mode, clear caffeine labels, caffeinated taps marked 18+ at family venues.</td></tr>
+        <tr><td><b>Venue walks away</b></td><td>The club launches its own counter once it sees demand.</td><td><span class="chip" style="background:var(--yuzu)">Medium</span></td><td><span class="chip" style="background:var(--yuzu)">Medium</span></td><td>12-month exclusive placement agreement + live revenue dashboard for the venue.</td></tr>
+      </tbody>
+    </table></div></div>
+    <h3 style="font-size:24px;margin:28px 0 14px">Five cheap experiments before buying hardware</h3>
+    <div class="grid g5">
+      <div class="card" style="background:var(--lime)"><div class="stat">1</div><b>Count footfall</b><br><span style="font-size:14px">Sit at 5 venues for a peak evening.</span></div>
+      <div class="card" style="background:var(--yuzu)"><div class="stat">2</div><b>Price test</b><br><span style="font-size:14px">50 players pick ₹99, ₹129 or ₹149.</span></div>
+      <div class="card" style="background:var(--coral)"><div class="stat">3</div><b>Weekend pop-up</b><br><span style="font-size:14px">Hand-pour + froyo cups with a UPI QR.</span></div>
+      <div class="card" style="background:var(--cobalt);color:#fff"><div class="stat">4</div><b>100-pour test</b><br><span style="font-size:14px">Flow meter accuracy with foam.</span></div>
+      <div class="card" style="background:var(--violet);color:#fff"><div class="stat">5</div><b>3 signed LOIs</b><br><span style="font-size:14px">Venue letters before the first order.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND -->
+<section id="brand">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#4B2FC0">12 · Name &amp; brand</div><h2>20 names, 4 vibes</h2></div><p>From your name-suggestions doc. Filled chips are the strongest consumer picks.</p></div>
+    <div class="grid g2">
+      <div class="grid g2">
+        <div class="card soft"><div class="eyebrow" style="color:var(--cobalt)">Hardware &amp; tech-forward</div><p style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0">
+          <span class="chip" style="border:2px solid var(--ink);font-size:14px">Project TapFlow</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">The Vending OS</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">Project Solenoid</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">EdgePour Labs</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">Automated Apex</span></p></div>
+        <div class="card soft"><div class="eyebrow" style="color:#D2401F">Speed, impulse &amp; "clickable"</div><p style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0">
+          <span class="chip" style="border:2px solid var(--ink);font-size:14px">Project 10-Sec</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">Tap &amp; Go Ventures</span><span class="chip" style="border:2px solid var(--ink);font-size:14px;background:var(--coral)">Instant Fuel Co.</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">The Zero-Wait Wall</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">FlowState HQ</span></p></div>
+        <div class="card soft"><div class="eyebrow" style="color:#2F5A06">Sports, health &amp; cafe culture</div><p style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0">
+          <span class="chip" style="border:2px solid var(--ink);font-size:14px;background:var(--lime)">The Fuel Tap</span><span class="chip" style="border:2px solid var(--ink);font-size:14px;background:var(--lime)">Paddles &amp; Pours</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">Sweat &amp; Sip Systems</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">The Recovery Rig</span><span class="chip" style="border:2px solid var(--ink);font-size:14px;background:var(--ink);color:var(--lime)">EnduroBrew Labs</span></p></div>
+        <div class="card soft"><div class="eyebrow" style="color:#4B2FC0">Short &amp; minimalist</div><p style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0">
+          <span class="chip" style="border:2px solid var(--ink);font-size:14px;background:var(--yuzu)">TapCore</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">PourMesh</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">VibeVend</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">KioskX</span><span class="chip" style="border:2px solid var(--ink);font-size:14px">FlowNode</span></p></div>
+      </div>
+      <div class="card" style="background:var(--lime);border:3px solid var(--ink);display:flex;flex-direction:column;gap:16px">
+        <span class="eyebrow">Machine wrap concept</span>
+        <span style="font-family:var(--display);font-weight:700;font-size:22px">Enduro<span style="background:var(--ink);color:#fff;padding:0 6px;border-radius:6px">Brew</span></span>
+        <span style="font-family:var(--display);font-weight:700;font-size:clamp(36px,4vw,52px);line-height:1;letter-spacing:-.03em">Post-match cold brew in 10 seconds.</span>
+        <span style="font-weight:600;font-size:17px">Tap protein. Skip the queue.</span>
+        <span class="chip" style="background:var(--ink);color:var(--lime);font-size:15px;align-self:flex-start;padding:10px 16px">First pour free for club members</span>
+        <p style="margin:0;font-size:14px"><b>Naming system:</b> company EnduroBrew Labs · machine brand EnduroBrew (or The Fuel Tap). Check the .com / .in domain, Instagram handle and a class-32 trademark search first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="soft" id="sources">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow" style="color:#4B2FC0">13 · Sources</div><h2>Where the numbers come from</h2></div><p>Every market figure and benchmark on this page links back to its source. Open them to check or dig deeper.</p></div>
+    <div class="grid g3">
+      <div class="card" style="background:#fff;border-top:8px solid var(--cobalt)">
+        <h3 style="font-size:20px;margin-bottom:10px">Market size &amp; growth</h3>
+        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">
+          <li><a href="https://www.imarcgroup.com/india-cold-brew-coffee-market">IMARC – India Cold Brew Coffee Market</a></li>
+          <li><a href="https://www.imarcgroup.com/india-protein-supplements-market">IMARC – India Protein Supplements Market</a></li>
+          <li><a href="https://market-research-report-1.gitbook.io/latest-research-report/india-vending-machines-market-analysis-size-share-growth-and-outlook-2025-2033">IMARC – India Vending Machines Market</a></li>
+          <li><a href="https://www.marknteladvisors.com/query/request-customization/india-hot-beverage-vending-machine-market.html">MarkNtel – India Hot Beverage Vending Market</a></li>
+          <li><a href="https://athletechnews.com/india-fitness-market-expected-to-more-than-double/">Athletech News – India fitness market (Deloitte–HFA)</a></li>
+        </ul>
+      </div>
+      <div class="card" style="background:#fff;border-top:8px solid var(--lime)">
+        <h3 style="font-size:20px;margin-bottom:10px">Sports, payments &amp; rules</h3>
+        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">
+          <li><a href="https://ibef.org/blogs/pickleball-picks-up-pace-india-s-new-sporting-business-frontier">IBEF – Pickleball picks up pace</a></li>
+          <li><a href="https://www.freepressjournal.in/sports/padel-surges-across-urban-india-with-300-courts-corporate-backing-and-ms-dhoni-investment-says-padelpark-india-co-founder-nikhil-sachdev">Free Press Journal – Padel courts in India</a></li>
+          <li><a href="https://www.businesstoday.in/personal-finance/banking/story/upi-hits-record-754-mn-transactions-in-a-single-day-monthly-volume-surges-to-207-bn-in-october-500469-2025-11-01">Business Today – UPI record, Oct 2025</a></li>
+          <li><a href="https://razorpay.com/blog/upi-charges-explained-mdr-vs-platform-fees/">Razorpay – UPI charges explained</a></li>
+          <li><a href="https://www.fssai.gov.in/upload/uploadfiles/files/FAQs_Licensing_Registration_21_06_2021.pdf">FSSAI – Licensing &amp; registration FAQs</a></li>
+        </ul>
+      </div>
+      <div class="card" style="background:#fff;border-top:8px solid var(--coral)">
+        <h3 style="font-size:20px;margin-bottom:10px">Competitors (India)</h3>
+        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">
+          <li><a href="https://inc42.com/buzz/daalchini-claims-2x-yoy-jump-in-fy26-revenue-to-%e2%82%b9140-cr/">Inc42 – Daalchini FY26 revenue</a></li>
+          <li><a href="https://inc42.com/buzz/exclusive-daalchini-turns-profitable-posts-inr-2-5-cr-pat-in-fy25">Inc42 – Daalchini turns profitable</a></li>
+        </ul>
+      </div>
+      <div class="card" style="background:#fff;border-top:8px solid var(--yuzu)">
+        <h3 style="font-size:20px;margin-bottom:10px">Yogurtland · Dubai &amp; brand</h3>
+        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">
+          <li><a href="https://www.thenationalnews.com/lifestyle/food/free-samples-at-yogurtland-in-the-dubai-mall-1.685418">The National – Yogurtland Dubai Mall</a></li>
+          <li><a href="https://lovin.co/dubai/en/inspo/best-of/six-of-the-best-places-to-get-frozen-yoghury-in-dubai">Lovin Dubai – Best frozen yoghurt in Dubai</a></li>
+          <li><a href="https://dev.timeoutabudhabi.com/?p=12978">Time Out Abu Dhabi – Sweet treats for kids</a></li>
+          <li><a href="https://deliveroo.ae/menu/dubai/dubai-mall/yogurtland-dubai-mall?day=today">Deliveroo UAE – Yogurtland Dubai Mall</a></li>
+          <li><a href="https://www.happycow.net/reviews/yogurtland-springs-dubai-297770">HappyCow – Yogurtland Springs</a></li>
+          <li><a href="https://www.franchising.com/amp/news/20140130_yogurtland_debuts_in_the_middle_east_opens_first_s.html">Franchising.com – Yogurtland debuts in the Middle East</a></li>
+          <li><a href="https://www.wikipedia.org/wiki/Yogurtland">Wikipedia – Yogurtland</a></li>
+          <li><a href="https://www.franchising.com/amp/news/20210301_yogurtland_launches_brand39s_first_ever_oat_milk_flavor.html">Yogurtland – First oat-milk flavour</a></li>
+          <li><a href="https://www.livekindly.com/complete-guide-vegan-flavors-yogurtland/amp/">LIVEKINDLY – Yogurtland vegan flavours</a></li>
+        </ul>
+      </div>
+      <div class="card" style="background:#fff;border-top:8px solid var(--violet)">
+        <h3 style="font-size:20px;margin-bottom:10px">UK froyo scene</h3>
+        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">
+          <li><a href="https://deliveroo.co.uk/menu/london/lavender-hill/snog-frozen-yogurt-clapham">Deliveroo UK – SNOG Clapham</a></li>
+          <li><a href="https://deliveroo.co.uk/menu/london/soho/snog-frozen-yogurt-soho">Deliveroo UK – SNOG Soho</a></li>
+          <li><a href="https://deliveroo.co.uk/menu/london/covent-garden/yole-covent-garden">Deliveroo UK – Yolé Covent Garden</a></li>
+          <li><a href="https://www.restaurantonline.co.uk/Article/2026/08/04/yo-chi-to-open-first-uk-store-in-notting-hill/">Restaurant Online – Yo-Chi UK</a></li>
+          <li><a href="https://www.timeout.com/london/news/yo-chi-first-location-notting-hill-081726">Time Out London – Yo-Chi Notting Hill</a></li>
+          <li><a href="https://www.timeout.com/london/news/yo-chi-frozen-yoghurt-second-location-clapham-111026">Time Out London – Yo-Chi Clapham</a></li>
+          <li><a href="https://www.rli.uk.com/?p=221952">RLI – MYKA opens in London</a></li>
+          <li><a href="https://www.grocerygazette.co.uk/?p=115388">Grocery Gazette – Go Greek Yogurt UK</a></li>
+        </ul>
+      </div>
+      <div class="card" style="background:#fff;border-top:8px solid var(--mint)">
+        <h3 style="font-size:20px;margin-bottom:10px">Personalisation, wearables &amp; privacy</h3>
+        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">
+          <li><a href="https://www.drinklinc.com/">LINC – connected supplement system</a></li>
+          <li><a href="https://openwearables.io/blog/page/5.md">Open Wearables – Apple Health &amp; Health Connect</a></li>
+          <li><a href="https://www.whoop.com/us/en/thelocker/access-your-whoop-data-with-new-integrations-data-export-options/">WHOOP – Developer Platform</a></li>
+          <li><a href="https://openwearables.io/blog/garmin-connect-developer-program-reopened">Open Wearables – Garmin program reopened</a></li>
+          <li><a href="https://www.idc.com/resource-center/press-releases/india-wearables-market-fy2025/">IDC – India wearables market 2025</a></li>
+          <li><a href="https://www.hlc.com/en/publications/indias-digital-personal-data-protection-act-2023-brought-into-force-">Hogan Lovells – DPDP Rules 2025</a></li>
+          <li><a href="https://www.chronicleindia.in/current-affairs/15231-digital-personal-data-protection-rules-2025">Chronicle India – DPDP phased rollout</a></li>
+          <li><a href="https://idtechwire.com/india-operationalizes-digital-personal-data-protection-act-with-saral-rules/">ID Tech – DPDP consent notices</a></li>
+        </ul>
+      </div>
+      <div class="card dark">
+        <h3 style="font-size:20px;margin-bottom:10px">Our own estimates</h3>
+        <p style="margin:0;font-size:14px;color:#CFCDE0">Not from a source — worked out for this plan, to be checked in the pilot:</p>
+        <ul style="margin:10px 0 0;padding-left:18px;font-size:14px;line-height:1.8;color:#E4E2F0">
+          <li>Realistic &amp; cautious scenarios (30 and 12 cups/day)</li>
+          <li>₹10 K/month ops cost and 5% wastage</li>
+          <li>Daalchini ≈ ₹26 K per machine a month</li>
+          <li>12-month fleet build-up and phase gates</li>
+          <li>Age modes, India twists and every "idea" item</li>
+          <li>Fuel Engine, identity options, Fuel Pass and personalisation rollout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="font-family:var(--display);font-size:22px;color:#fff;margin:0 0 12px">Enduro<span style="color:var(--lime)">Brew</span> · Project Plan · Nov 2026</p>
+    <p style="margin:0 0 8px">Market figures are from the sources named under each section. Scenario economics, fleet plan, age modes and items tagged "idea" are our own estimates and suggestions — validate them in the pilot.</p>
+    <p style="margin:0">Key sources: IMARC · NPCI · IBEF / CapTable · Free Press Journal · Deloitte–HFA · Inc42 · Razorpay · FSSAI · The National · Lovin Dubai · Time Out · Deliveroo · Restaurant Online · The Grocer · RLI · Yogurtland press releases.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cups=document.getElementById('cups'), ticket=document.getElementById('ticket');
+  function inr(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+  function calc(){
+    var c=+cups.value, t=+ticket.value;
+    document.getElementById('cupsV').textContent=c;
+    document.getElementById('ticketV').textContent=t;
+    var rev=c*t*30, net=rev*(1-0.30-0.05-0.15-0.0236)-10000;
+    document.getElementById('rev').textContent=inr(rev);
+    document.getElementById('net').textContent=(net<0?'− ':'')+inr(Math.abs(net));
+    document.getElementById('pay').textContent= net>0 ? (120000/net).toFixed(1)+' months' : 'never';
+  }
+  cups.addEventListener('input',calc); ticket.addEventListener('input',calc); calc();
+})();
+</script>
+</body>
+</html>

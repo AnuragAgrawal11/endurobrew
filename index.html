@@ -435,6 +435,22 @@ footer a{color:var(--lime)}
       <div class="card" style="background:var(--ink2)"><div class="eyebrow" style="color:var(--lime)">4 · Dispense</div><h3 style="font-size:21px;margin:6px 0">Machine makes it</h3><span style="color:#CFCDE0;font-size:15px">Base (shake, smoothie bowl, froyo, cold brew, electrolyte) + dosing pumps add exact protein, electrolytes, carbs or a caffeine shot.</span></div>
     </div>
 
+    <!-- WATCH-BY-WATCH SYNC -->
+    <h3 style="font-size:28px;margin:36px 0 6px">How each fitness watch syncs to EnduroBrew</h3>
+    <p style="color:#CFCDE0;margin:0 0 14px;max-width:820px">Two routes: through the phone's health hub (Apple Health on iPhone, Health Connect on Android), or straight from the watch company's cloud. The app picks whichever works.</p>
+    <div class="card" style="background:#fff;color:var(--ink)"><div class="tbl-box"><table>
+      <thead><tr><th>Watch / tracker</th><th>How it connects</th><th>What we read</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><b>Apple Watch</b></td><td>Apple Health (HealthKit) inside our iOS app — no server API exists, so it's on-device</td><td>Workouts, heart rate, active kcal, sleep, HRV</td><td><span class="chip" style="background:var(--lime)">Phase 2</span></td></tr>
+        <tr><td><b>WHOOP</b></td><td>WHOOP Developer API (user opts in with WHOOP login) — or via Apple Health</td><td>Strain, recovery, sleep, workouts</td><td><span class="chip" style="background:var(--lime)">Phase 2</span></td></tr>
+        <tr><td><b>Samsung Galaxy Watch, Pixel / Fitbit</b></td><td>Health Connect on Android</td><td>Exercise sessions, heart rate, kcal, sleep</td><td><span class="chip" style="background:var(--lime)">Phase 2</span></td></tr>
+        <tr><td><b>Garmin</b></td><td>Garmin Connect Developer Program (reopened Oct 2026) — meanwhile Garmin already pushes into Apple Health / Health Connect</td><td>Activities, HR, training load, sleep, stress</td><td><span class="chip" style="background:var(--yuzu)">Phase 2 via phone · Phase 3 direct</span></td></tr>
+        <tr><td><b>Oura, Ultrahuman rings</b></td><td>Their cloud APIs or Apple Health / Health Connect</td><td>Sleep, readiness, activity</td><td><span class="chip" style="background:var(--yuzu)">Phase 3</span></td></tr>
+        <tr><td><b>Noise, boAt, Fire-Boltt</b> (India's top sellers)</td><td>Only if their app writes to Health Connect / Apple Health — must test each</td><td>Steps, HR, workouts (varies)</td><td><span class="chip" style="background:var(--coral)">Test in pilot</span></td></tr>
+        <tr><td><b>No watch</b></td><td>3-tap quiz on the machine or app: sport, minutes, intensity</td><td>Self-reported workout</td><td><span class="chip" style="background:var(--lime)">Pilot (day 1)</span></td></tr>
+      </tbody>
+    </table></div></div>
+
     <!-- LINC vs ENDUROBREW -->
     <h3 style="font-size:28px;margin:36px 0 6px">Personalisation like LINC — rebuilt for India</h3>
     <p style="color:#CFCDE0;margin:0 0 14px;max-width:820px">LINC (US) proved the idea: sync your body data, get a drink made for you each day. EnduroBrew takes the same brain and puts it inside a public machine network at the places Indians already work out.</p>

@@ -1,5 +1,6 @@
-# EnduroBrew — Project Plan
+# EnduroBrew — Project Plan (private)
 
-Smart IoT tap & vending network for urban India: coffee brews, protein froyo, smoothies and personalised fuel from your wearable data.
+This page is password-protected and encrypted (AES-256-GCM, PBKDF2 600k).
+Ask Anurag for the password.
 
-Live page: https://anuragagrawal11.github.io/endurobrew/
+https://anuragagrawal11.github.io/endurobrew/
